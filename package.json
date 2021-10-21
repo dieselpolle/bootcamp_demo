@@ -1,0 +1,22 @@
+{
+  "name": "bootcamp_demo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dieselpolle/bootcamp_demo.git"
+  },
+  "author": "dieselpolle",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dieselpolle/bootcamp_demo/issues"
+  },
+  "homepage": "https://github.com/dieselpolle/bootcamp_demo#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
