@@ -53,3 +53,18 @@ a {
   background-color: #f1f1f1;
   text-align: center;
 }
+/* The alert message box */
+.alert {
+  padding: 20px;
+  background-color: red;
+  color: white;
+  margin-bottom: 15px;
+}
+
+/* The info message box */
+.info {
+  padding: 20px;
+  background-color: green;
+  color: white;
+  margin-bottom: 15px;
+}
