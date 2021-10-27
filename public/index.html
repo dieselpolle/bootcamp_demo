@@ -11,12 +11,13 @@
 </head>
 
 <body>
-    <form id="register" action="javascript:sendRequestForAuth()">
+    <form id="register" action="javascript:send('register')">
         <script>
             let urlParams = new URLSearchParams(window.location.search);
             if (urlParams.has('errorMessage')) document.write("<div class='alert'>"+urlParams.get('errorMessage')+"</div>");
             else if (urlParams.has('message')) document.write("<div class='info'>"+urlParams.get('message')+"</div>");
             else if (urlParams.has('email')) document.write("<div class='info'>"+urlParams.get('email')+" registered succesfully.</div>");
+            if (checkLogin()==true) window.location = "main.html";
         </script>
         <div class="container">
             <h1>Register</h1>
