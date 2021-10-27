@@ -15,17 +15,16 @@ function sendRequestForAuth() {
     //wait the execution to be ready or alert an error
     xhttp.onload = function () {
         if (xhttp.status != 200) { // analyze HTTP status of the response
-            alert("Something is broken, sorry: " + xhttp.status + ":" + xhttp.statusText); // e.g. 404: Not Found
+            window.location="index.html?errorMessage='Something is broken, sorry: " + xhttp.status + ":" + xhttp.statusText + "'"; //show error on page
         } else if (JSON.parse(xhttp.response).email!==undefined) { // show the result if response contains valid email
             let registeredEmail = JSON.parse(xhttp.response).email;
-            alert("The user " + registeredEmail + " succesfully registered. Wait for email confirmation."); // response is the server response
-            window.location = 'login.html';
-        } else { //otherwise alert the response
-            alert("Error: "+xhttp.response);
+            window.location = "login.html?message='The user " + registeredEmail + " succesfully registered. Wait for email confirmation.'"; //show message on page
+        } else { //if email parameter is undefined, it is already in db
+            window.location="index.html?errorMessage='The email is already registered."; //show error on page
         }
     };
 
     xhttp.onerror = function () { //on other error, show alert
-        alert("Shit happened: "+xhttp.response);
+        window.location="index.html?errorMessage='Something is broken, sorry: " + xhttp.status + ":" + xhttp.statusText + "'"; //show error on page
     };
 }
