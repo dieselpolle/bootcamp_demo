@@ -1,10 +1,10 @@
 //Set the REST API HOST by commenting the unnecessary
 //
 //1) Use localhost:
-//var urlAPI = http://localhost:3000
+//var urlAPI = "http://localhost:3000";
 //
 //2) use other:
-var urlAPI = https://mikko-bootcamp-backend.herokuapp.com
+var urlAPI = "https://mikko-bootcamp-backend.herokuapp.com";
 
 //set available controller URL's
 var urlRegister = urlAPI+"/requestAuth";
