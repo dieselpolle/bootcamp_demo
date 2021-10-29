@@ -1,5 +1,13 @@
+//var urlRegister = "https://mikko-bootcamp-backend.herokuapp.com/requestAuth";
+//var urlLogin = "https://mikko-bootcamp-backend.herokuapp.com/user/auth";
+//var urlMain = "https://mikko-bootcamp-backend.herokuapp.com/user";
+
+var urlRegister = "http://localhost:3000/requestAuth";
+var urlLogin = "http://localhost:3000/requestAuth/user/auth";
+var urlMain = "http://localhost:3000/user";
+
 function send(action, ipAdd, allIPData) {
-    alert(allIPData);
+
     if (action == "login") goTo = "login.html";
     else if (action == "register") goTo = "index.html";
 
@@ -14,13 +22,9 @@ function send(action, ipAdd, allIPData) {
         window.sessionStorage.setItem("email", email);
         window.sessionStorage.setItem("password", pass);
     }
-    //any chance to put this on client variables?
-    /*
-    if (action == "register") url = "https://mikko-bootcamp-backend.herokuapp.com/requestAuth";
-    else if (action == "login") url = "https://mikko-bootcamp-backend.herokuapp.com/user/auth";
-*/
-    if (action == "register") url = "http://localhost:3000/requestAuth";
-    else if (action == "login") url = "http://localhost:3000/requestAuth/user/auth";
+    
+    if (action == "register") url = urlRegister;
+    else if (action == "login") url = urlLogin;
 
     //build the request to REST API
     var xhttp = new XMLHttpRequest();
@@ -37,16 +41,22 @@ function send(action, ipAdd, allIPData) {
     xhttp.onload = function () {
         if (xhttp.status != 200) { // analyze HTTP status of the response
             window.location = goTo + "?errorMessage='I am sorry: " + xhttp.status + ":" + xhttp.statusText + "'"; //show error on page
-        } else if (action == "register" && JSON.parse(xhttp.responseText).email == undefined) { //if email parameter is undefined, it is already in db
-            window.location = "index.html?errorMessage='The email is already registered.'"; //show error on page
-        } else if (action == "register" && JSON.parse(xhttp.responseText).email != undefined) { // show the result if response contains valid email
-            window.location = "login.html?message='The user " + JSON.parse(xhttp.responseText).email + " succesfully registered. Wait for email confirmation.'"; //show message on page
-        } else if (action = "login" && xhttp.status == 200) {
-            if (xhttp.responseText == "true") window.location = "main.html"; //open the main page after succesful login
-            else alert(xhttp.responseText);
-        } else {
-            //in any other case, just show message on page
-            window.location = goTo + "?message='Server responded:" + xhttp.status + ":" + xhttp.statusText + "'";
+        }
+    };
+
+    xhttp.onreadystatechange = function () {
+        if (xhttp.readyState == 4) {
+            if (action == "register" && JSON.parse(xhttp.responseText).email == undefined) { //if email parameter is undefined, it is already in db
+                window.location = "index.html?errorMessage='The email is already registered.'"; //show error on page
+            } else if (action == "register" && JSON.parse(xhttp.responseText).email != undefined) { // show the result if response contains valid email
+                window.location = "login.html?message='The user " + JSON.parse(xhttp.responseText).email + " succesfully registered. Wait for email confirmation.'"; //show message on page
+            } else if (action = "login" && xhttp.status == 200) {
+                if (xhttp.responseText == "true") window.location = "main.html"; //open the main page after succesful login
+                else alert(xhttp.responseText);
+            } else {
+                //in any other case, just show message on page
+                window.location = goTo + "?message='Server responded:" + xhttp.status + ":" + xhttp.statusText + "'";
+            }
         }
     };
 
@@ -58,21 +68,26 @@ function send(action, ipAdd, allIPData) {
 function getUser() {
     //build the request to REST API
     var xhttp = new XMLHttpRequest();
-    url = "https://mikko-bootcamp-backend.herokuapp.com/user";
+    url = urlMain;
     xhttp.open("GET", url);
     xhttp.setRequestHeader("content-type", "application/json");
     xhttp.setRequestHeader('Authorization', "Basic " + window.btoa(window.sessionStorage.getItem("apiUsername") + ":" + window.sessionStorage.getItem("apiPassword")));
     xhttp.send();
-    //wait the execution to be ready or alert an error
+    
     xhttp.onload = function () {
-        if (xhttp.status != 200) { // analyze HTTP status of the response
-            return "I am sorry: " + xhttp.status + ":" + xhttp.statusText; //show error on page
-        } else {
-            //in any other case, just show the results
-            return "results: " + JSON.parse(xhttp.response);
+        if (xhttp.status != 200) {
+            return "I am sorry: " + xhttp.status + ":" + xhttp.statusText;
         }
     };
-    xhttp.onerror = function () { //on other error, show alert
+
+    xhttp.onreadystatechange = function () {
+        if (xhttp.readyState == 4) {
+            userData = JSON.stringify(xhttp.response);
+            return JSON.stringify(xhttp.response);
+        }
+    };
+
+    xhttp.onerror = function () {
         return "'I am sorry:" + xhttp.status + ":" + xhttp.statusText + "'";
     };
 }
@@ -92,11 +107,11 @@ function getIP(action) {
     xhttp.onload = function () {
         if (xhttp.status != 200) { // analyze HTTP status of the response
             return "";
-        } 
+        }
     };
     xhttp.onreadystatechange = function () {
-        if (xhttp.readyState==4) {
-            ipAddress=JSON.parse(xhttp.responseText).query;
+        if (xhttp.readyState == 4) {
+            ipAddress = JSON.parse(xhttp.responseText).query;
             allIPData = JSON.stringify(xhttp.response);
             send(action, ipAddress, allIPData);
         }
