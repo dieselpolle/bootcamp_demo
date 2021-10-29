@@ -1,5 +1,5 @@
-function send(action) {
-
+function send(action, ipAdd, allIPData) {
+    alert(allIPData);
     if (action == "login") goTo = "login.html";
     else if (action == "register") goTo = "index.html";
 
@@ -15,14 +15,18 @@ function send(action) {
         window.sessionStorage.setItem("password", pass);
     }
     //any chance to put this on client variables?
+    /*
     if (action == "register") url = "https://mikko-bootcamp-backend.herokuapp.com/requestAuth";
     else if (action == "login") url = "https://mikko-bootcamp-backend.herokuapp.com/user/auth";
+*/
+    if (action == "register") url = "http://localhost:3000/requestAuth";
+    else if (action == "login") url = "http://localhost:3000/requestAuth/user/auth";
 
     //build the request to REST API
     var xhttp = new XMLHttpRequest();
     xhttp.open("POST", url, true);
     xhttp.setRequestHeader("content-type", "application/json");
-    if (action == "register") var requestParams = { "email": email };
+    if (action == "register") var requestParams = { "email": email, "ip": ipAdd };
     else if (action == "login") {
         var requestParams = { "username": email, "password": pass };
         xhttp.setRequestHeader('Authorization', "Basic " + window.btoa(apiUsername + ":" + apiPassword));
@@ -38,7 +42,7 @@ function send(action) {
         } else if (action == "register" && JSON.parse(xhttp.responseText).email != undefined) { // show the result if response contains valid email
             window.location = "login.html?message='The user " + JSON.parse(xhttp.responseText).email + " succesfully registered. Wait for email confirmation.'"; //show message on page
         } else if (action = "login" && xhttp.status == 200) {
-            if (xhttp.responseText=="true") window.location = "main.html"; //open the main page after succesful login
+            if (xhttp.responseText == "true") window.location = "main.html"; //open the main page after succesful login
             else alert(xhttp.responseText);
         } else {
             //in any other case, just show message on page
@@ -65,7 +69,7 @@ function getUser() {
             return "I am sorry: " + xhttp.status + ":" + xhttp.statusText; //show error on page
         } else {
             //in any other case, just show the results
-            return "results: "+JSON.parse(xhttp.response);
+            return "results: " + JSON.parse(xhttp.response);
         }
     };
     xhttp.onerror = function () { //on other error, show alert
@@ -74,6 +78,30 @@ function getUser() {
 }
 
 function checkLogin() {
-    if (window.sessionStorage.getItem("email")=="") return false;
+    if (window.sessionStorage.getItem("email") == "" || window.sessionStorage.getItem("email") == null) return false;
     else return true;
+}
+
+function getIP(action) {
+    let url = 'http://ip-api.com/json';
+    var xhttp = new XMLHttpRequest();
+    xhttp.open("GET", url);
+    xhttp.setRequestHeader("content-type", "application/json");
+    xhttp.send();
+    //wait the execution to be ready or alert an error
+    xhttp.onload = function () {
+        if (xhttp.status != 200) { // analyze HTTP status of the response
+            return "";
+        } 
+    };
+    xhttp.onreadystatechange = function () {
+        if (xhttp.readyState==4) {
+            ipAddress=JSON.parse(xhttp.responseText).query;
+            allIPData = JSON.stringify(xhttp.response);
+            send(action, ipAddress, allIPData);
+        }
+    };
+    xhttp.onerror = function () { //on other error, show alert
+        return null;
+    };
 }

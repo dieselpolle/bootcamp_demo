@@ -1,28 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CALLING BOOTCAMP REST API</title>
     <link rel="stylesheet" href="css/styles.css">
-    <script type = "text/javascript" src="js/tools.js"></script>
+    <script type="text/javascript" src="js/tools.js"></script>
 </head>
+
 <body>
-    <script>
-        let urlParams = new URLSearchParams(window.location.search);
-        if (urlParams.has('errorMessage')) document.write("<div class='alert'>"+urlParams.get('errorMessage')+"</div>");
-        else if (urlParams.has('message')) document.write("<div class='info'>"+urlParams.get('message')+"</div>");
-        if (checkLogin()==false) window.location = "index.html";
-    </script>
-    <h1>Calling REST API</h1>
-    <script>
-        document.writeln(window.sessionStorage.getItem("email"));
-        document.writeln(window.sessionStorage.getItem("password"));
-        document.writeln(window.sessionStorage.getItem("apiUsername"));
-        document.writeln(window.sessionStorage.getItem("apiPassword"));
-        document.writeln(getUser());
-    </script>
-    <a href="javascript:window.sessionStorage.setItem('email', '');javascript:window.location='index.html';">LOGOUT</a>
+    <div class="container">
+        <script>
+            let urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.has('errorMessage')) document.write("<div class='alert'>" + urlParams.get('errorMessage') + "</div>");
+            else if (urlParams.has('message')) document.write("<div class='info'>" + urlParams.get('message') + "</div>");
+            if (checkLogin() == false) window.location = "index.html";
+        </script>
+        <h1>Calling REST API</h1>
+        <script>
+            document.writeln(window.sessionStorage.getItem("email"));
+            document.writeln(window.sessionStorage.getItem("password"));
+            document.writeln(window.sessionStorage.getItem("apiUsername"));
+            document.writeln(window.sessionStorage.getItem("apiPassword"));
+            document.writeln(getUser());
+        </script>
+        <a
+            href="javascript:window.sessionStorage.setItem('email', '');javascript:window.location='index.html';">LOGOUT</a>
+    </div>
 </body>
+
 </html>
