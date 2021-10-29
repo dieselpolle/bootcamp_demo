@@ -9,6 +9,7 @@
     <script type = "text/javascript" src="js/tools.js"></script>
 </head>
 <body>
+<center>
     <form id="login" action="javascript:send('login','','')">
         <div class="container">
             <h1>Login</h1>
@@ -20,19 +21,19 @@
                 if (checkLogin()==true) window.location = "main.html";
             </script>
             <hr>
-            <label for="emailLabel"><b>Email</b></label>
-            <input type="text" placeholder="Enter Email" name="email" id="email" required>
-            <label for="passwordLabel"><b>Password</b></label>
-            <input type="password" placeholder="Enter password" name="password" id="password" required>
-            <label for="apiUsernameLabel"><b>API USERNAME</b></label>
-            <input type="text" placeholder="Enter API username" name="apiUsername" id="apiUsername" required>
-            <label for="apiPasswordLabel"><b>API PASSWORD</b></label>
-            <input type="password" placeholder="Enter API password" name="apiPassword" id="apiPassword" required>
-            <button type="submit" class="registerbtn">Login</button>
+            <label for="emailLabel"style="width: 250px;" ><b>Enter your email:</b></label><br/>
+            <input type="text" placeholder="Enter Email" name="email" id="email" required style="width: 250px;"><br/>
+            <label for="passwordLabel" style="width: 250px;"><b>Enter your password:</b></label><br/>
+            <input type="password" placeholder="Enter password" name="password" id="password" required style="width: 250px;"><br/>
+            <label for="apiUsernameLabel" style="width: 250px;"><b>Set API USERNAME</b></label><br/>
+            <input type="text" placeholder="Enter API username" name="apiUsername" id="apiUsername" required style="width: 250px;"><br/>
+            <label for="apiPasswordLabel" style="width: 250px;"><b>Set API PASSWORD</b></label><br/>
+            <input type="password" placeholder="Enter API password" name="apiPassword" id="apiPassword" required style="width: 250px;"><br/>
+            <button type="submit" class="registerbtn" style="width: 250px;">Login</button><br/>
         </div>
-
         <div class="containerSignIn">
             <p>Not account yet? <a href="index.html">Register here</a>.</p>
         </div>
     </form>
+    </center>
 </body>
