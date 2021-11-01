@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IP Address data</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <script type="text/javascript" src="js/tools.js"></script>
+</head>
+
+<body>
+    <div class="container">
+    <script>
+        var jsonIpDataResponse;
+        let urlParams = new URLSearchParams(window.location.search);
+
+        var xhttp = new XMLHttpRequest();
+        xhttp.open("GET", urlIpAdd+"/"+urlParams.get('ipAddressIs'));
+        xhttp.setRequestHeader("content-type", "application/json");
+        xhttp.setRequestHeader('Authorization', "Basic " + window.btoa(window.sessionStorage.getItem("apiUsername") + ":" + window.sessionStorage.getItem("apiPassword")));
+        xhttp.send();
+        //check if the api is available
+        xhttp.onload = function () {
+            if (xhttp.status != 200) { // analyze HTTP status of the response
+                document.write("<p>storeIpData, httpstatus not 200: " + xhttp.responseText+"</p>");
+            }
+        };
+        //check the state of the request processing, on state 4 the request is completely processed
+        //returns the response
+        xhttp.onreadystatechange = function () {
+            if (xhttp.readyState == 4) {
+                var data=xhttp.responseText;
+                jsonIpDataResponse = JSON.parse(data);
+                document.write("<p>IP: "+jsonIpDataResponse[0].query+"</p>");
+                document.write("<p>Country: "+jsonIpDataResponse[0].country+"</p>");
+                document.write("<p>Country code: "+jsonIpDataResponse[0].countrycode+"</p>");
+                document.write("<p>Region: "+jsonIpDataResponse[0].region+"</p>");
+                document.write("<p>Region name: "+jsonIpDataResponse[0].regionname+"</p>");
+                document.write("<p>City: "+jsonIpDataResponse[0].city+"</p>");
+                document.write("<p>Zip code: "+jsonIpDataResponse[0].zip+"</p>");
+                document.write("<p>LAT: "+jsonIpDataResponse[0].lat+"</p>");
+                document.write("<p>LON: "+jsonIpDataResponse[0].lon+"</p>");
+                document.write("<p>Timezone: "+jsonIpDataResponse[0].timezone+"</p>");
+                document.write("<p>ISP: "+jsonIpDataResponse[0].isp+"</p>");
+                document.write("<p>Organization: "+jsonIpDataResponse[0].org+"</p>");
+                document.write("<p>Organization: "+jsonIpDataResponse[0].org2+"</p>");
+
+            }
+        };
+        //on error, return error
+        xhttp.onerror = function () { //on other error, show alert
+            document.write("<p>storeIpData, error: " + xhttp.responseText+"</p>");
+        };
+        
+    </script>
+    </div>
+</body>
+
+</html>

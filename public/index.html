@@ -12,7 +12,7 @@
 
 <body>
     <center>
-    <form id="register" action="javascript:getIP('register')">
+    <form id="register" action="javascript:getIP()">
         <script>
             let urlParams = new URLSearchParams(window.location.search);
             if (urlParams.has('errorMessage')) document.write("<div class='alert'>" + urlParams.get('errorMessage') + "</div>");
