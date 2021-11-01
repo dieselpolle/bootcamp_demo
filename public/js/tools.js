@@ -1,18 +1,19 @@
 //Set the REST API HOST by commenting the unnecessary
 //
 //1) Use localhost:
-//var urlAPI = "http://localhost:3000";
+var urlAPI = "http://localhost:3000";
 //
 //2) use other:
-var urlAPI = "https://mikko-bootcamp-backend.herokuapp.com";
+//var urlAPI = "https://mikko-bootcamp-backend.herokuapp.com";
 
 //set available controller URL's
 var urlRegister = urlAPI+"/requestAuth";
 var urlLogin = urlAPI+"/requestAuth/user/auth";
 var urlMain = urlAPI+"/user";
+var urlIpAdd = urlAPI+"/ipAddr"
 
 //implements the login and registers functionalities
-function send(action, ipAdd, allIPData) {
+function send(action, ipAdd) {
 
     //check the action login or register and set the correct target html
     if (action == "login") goTo = "login.html";
@@ -133,12 +134,40 @@ function getIP(action) {
     xhttp.onreadystatechange = function () {
         if (xhttp.readyState == 4) {
             ipAddress = JSON.parse(xhttp.responseText).query;
-            allIPData = JSON.stringify(xhttp.response);
-            send(action, ipAddress, allIPData);
+            allIPData = xhttp.responseText;
+            storeIPData(allIPData, send(action, ipAddress));
+        }
+    };
+    //on error, return error
+    xhttp.onerror = function () { //on other error, return nothing
+        return null;
+    };
+}
+//store client's ip data to db
+function storeIPData(data, callback) {
+    var xhttp = new XMLHttpRequest();
+    xhttp.open("POST", urlIpAdd);
+    xhttp.setRequestHeader("content-type", "application/json");
+    xhttp.setRequestHeader('Authorization', "Basic " + window.btoa(window.sessionStorage.getItem("apiUsername") + ":" + window.sessionStorage.getItem("apiPassword")));
+    xhttp.send(data);
+    //check if the api is available
+    xhttp.onload = function () {
+        if (xhttp.status != 200) { // analyze HTTP status of the response
+            console.log("storeIpData, httpstatus not 200: "+xhttp.responseText);
+            //return "";
+        }
+    };
+    //check the state of the request processing, on state 4 the request is completely processed
+    //returns the response
+    xhttp.onreadystatechange = function () {
+        if (xhttp.readyState == 4) {
+            alert("storeIpData, state change: "+xhttp.responseText)
+            console.log("storeIpData, state change: "+xhttp.responseText);
         }
     };
     //on error, return error
     xhttp.onerror = function () { //on other error, show alert
-        return null;
+        alert("storeIpData, error: "+xhttp.responseText);
+        console.log("storeIpData, error: "+xhttp.responseText);
     };
 }

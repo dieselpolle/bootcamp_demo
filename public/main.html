@@ -33,21 +33,19 @@
                 var xhttp = new XMLHttpRequest();
                 xhttp.onreadystatechange = function () {
                     if (this.readyState == 4 && this.status == 200) {
-                        var data = '<TABLE class="styled-table">';
-                        data += '<THEAD>';
-                        data += '<tr><th>Registered user</th> <th>User IP Address</th>  <th>Registered</th> </tr>';
-                        data += '</THEAD>';
-                        data += '<TBODY>';
+                        var data = "<TABLE class='styled-table'>";
+                        data += "<THEAD>";
+                        data += "<tr><th>Registered user</th> <th>User IP Address</th>  <th>Registered</th> </tr>";
+                        data += "</THEAD>";
+                        data += "<TBODY>";
                         var users = JSON.parse(this.response);
                         for (row in users) {
-                            data += '<tr class="active-row">';
-                            data += '<td>' + users[row].email + '</td><td>' + users[row].ip + '</td><td>' + users[row].date + '</td>';
-                            data += '</tr>';
+                            data += "<tr class='active-row'>";
+                            data += "<td>" + users[row].email + "</td><td><a href='javascript:openIpData("+users[row].ip+")'>" + users[row].ip + "</a></td><td>" + users[row].date + "</td>";
+                            data += "</tr>";
                         }
-                        data += '</TBODY>';
-                        data += '</TABLE>';
-
-                        console.log(data);
+                        data += "</TBODY>";
+                        data += "</TABLE>";
                         document.getElementById("results").innerHTML = data;
                     }
                     else {
@@ -55,8 +53,8 @@
                     }
                 }
                 xhttp.open("GET", urlMain);
+                xhttp.setRequestHeader("content-type", "application/json");
                 xhttp.setRequestHeader('Authorization', "Basic " + btoa(window.sessionStorage.getItem("apiUsername") + ":" + window.sessionStorage.getItem("apiPassword")));
-
                 xhttp.send();
             }
 
