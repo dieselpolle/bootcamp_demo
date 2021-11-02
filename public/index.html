@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
-<script>ipData="";</script>
+<script>ipData = "";</script>
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -12,31 +13,40 @@
 
 <body>
     <center>
-    <form id="register" action="javascript:getIP()">
-        <script>
-            let urlParams = new URLSearchParams(window.location.search);
-            if (urlParams.has('errorMessage')) document.write("<div class='alert'>" + urlParams.get('errorMessage') + "</div>");
-            else if (urlParams.has('message')) document.write("<div class='info'>" + urlParams.get('message') + "</div>");
-            else if (urlParams.has('email')) document.write("<div class='info'>" + urlParams.get('email') + " registered succesfully.</div>");
-            if (checkLogin() == true) window.location = "main.html";
-        </script>
-        <div class="container">
-            <h1>Register</h1>
-            <p>Ask permission to join by sending your email below:</p>
-            <hr>
-        </div>
-        <div class="container">
-            <label for="email"><b>Enter your email: </b></label>
-            <br/>
-            <input type="text" style="width: 250px;" placeholder="Enter Email" name="email" id="email" required>
-            <br/>
-            <button type="submit" style="width: 250px;"  class="registerbtn">Register</button>
-        </div>
+        <form id="register" action="javascript:validateEmail()">
+            <script>
+                let urlParams = new URLSearchParams(window.location.search);
+                if (urlParams.has('errorMessage')) document.write("<div class='alert'>" + urlParams.get('errorMessage') + "</div>");
+                else if (urlParams.has('message')) document.write("<div class='info'>" + urlParams.get('message') + "</div>");
+                else if (urlParams.has('email')) document.write("<div class='info'>" + urlParams.get('email') + " registered succesfully.</div>");
+                
+                if (checkLogin() == true) window.location = "main.html";
+                
+                function validateEmail() {
+                    if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(document.getElementById("email").value)) {
+                        getIP();
+                    } else {
+                        alert("Check email address!")
+                    }
+                }
+            </script>
+            <div class="container">
+                <h1>Register</h1>
+                <p>Ask permission to join by sending your email below:</p>
+                <hr>
+            </div>
+            <div class="container">
+                <label for="email"><b>Enter your email: </b></label>
+                <br />
+                <input type="text" style="width: 250px;" placeholder="Enter Email" name="email" id="email" required>
+                <br />
+                <button type="submit" style="width: 250px;" class="registerbtn">Register</button>
+            </div>
 
-        <div class="containerSignIn">
-            <p>Already have an account? <a href="login.html">Login here</a>.</p>
-        </div>
-    </form>
+            <div class="containerSignIn">
+                <p>Already have an account? <a href="login.html">Login here</a>.</p>
+            </div>
+        </form>
     </center>
 </body>
 
