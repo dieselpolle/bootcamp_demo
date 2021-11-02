@@ -14,6 +14,7 @@
         <div class="container">
             <h1>Login</h1>
             <script>
+                //if there is messages in url, show them on the header
                 let urlParams = new URLSearchParams(window.location.search);
                 if (urlParams.has('errorMessage')) document.write("<div class='alert'>"+urlParams.get('errorMessage')+"</div>");
                 else if (urlParams.has('message')) document.write("<div class='info'>"+urlParams.get('message')+"</div>");

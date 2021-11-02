@@ -15,7 +15,7 @@
     <script>
         var jsonIpDataResponse;
         let urlParams = new URLSearchParams(window.location.search);
-
+        //fetch ip data from api, add the ip address to the api url
         var xhttp = new XMLHttpRequest();
         xhttp.open("GET", urlIpAdd+"/"+urlParams.get('ipAddressIs'));
         xhttp.setRequestHeader("content-type", "application/json");

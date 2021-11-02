@@ -15,18 +15,19 @@
     <center>
         <form id="register" action="javascript:validateEmail()">
             <script>
+                //if there is messages in url, show them on header
                 let urlParams = new URLSearchParams(window.location.search);
                 if (urlParams.has('errorMessage')) document.write("<div class='alert'>" + urlParams.get('errorMessage') + "</div>");
                 else if (urlParams.has('message')) document.write("<div class='info'>" + urlParams.get('message') + "</div>");
                 else if (urlParams.has('email')) document.write("<div class='info'>" + urlParams.get('email') + " registered succesfully.</div>");
-                
+
                 if (checkLogin() == true) window.location = "main.html";
-                
+                //validate email fields input value, if it is not valid, show the error
                 function validateEmail() {
                     if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(document.getElementById("email").value)) {
                         getIP();
                     } else {
-                        window.location = "index.html?errorMessage='The given email "+document.getElementById("email").value+" is not valid'";
+                        window.location = "index.html?errorMessage='The given email " + document.getElementById("email").value + " is not valid'";
                     }
                 }
             </script>

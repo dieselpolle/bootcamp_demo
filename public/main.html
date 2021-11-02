@@ -17,7 +17,9 @@
             let urlParams = new URLSearchParams(window.location.search);
             if (urlParams.has('errorMessage')) document.write("<div class='alert'>" + urlParams.get('errorMessage') + "</div>");
             else if (urlParams.has('message')) document.write("<div class='info'>" + urlParams.get('message') + "</div>");
+            //check if the login is active
             if (checkLogin() == false) window.location = "index.html";
+            //opens the ip address data on popup
             function openIpData(ipAddress) {
                 width = 300;
                 height = 450;
@@ -32,41 +34,45 @@
         <h1>Calling REST API</h1>
         <p>You are logged in as:
             <script>document.writeln(window.sessionStorage.getItem("email"))</script>
-            <a href="javascript:window.sessionStorage.setItem('password', '');javascript:window.location='index.html';">(LOGOUT)</a>
+            <a
+                href="javascript:window.sessionStorage.setItem('password', '');javascript:window.location='index.html';">(LOGOUT)</a>
         </p>
         <hr>
-        <center><button type="submit" class="buttonStyle" style="width: 250px;" onClick="javascript:window.location.reload()">Reload</button></center>
+        <center><button type="submit" class="buttonStyle" style="width: 250px;"
+                onClick="javascript:window.location.reload()">Reload</button></center>
         <div id="results"></div>
         <script>
-                getUsers();
-                function getUsers() {
+            //gets user listing, separate function call because if some pre handling is needed in future
+            getUsers();
+            function getUsers() {
                 var xhttp = new XMLHttpRequest();
                 xhttp.onreadystatechange = function () {
                     if (this.readyState == 4 && this.status == 200) {
                         var data = "<TABLE class='styled-table'>";
-                    data += "<THEAD>";
-                        data += "<tr><th>Registered user</th><th>User IP Address</th><th>Registered</th></tr>";
+                        data += "<THEAD>";
+                        data += "<tr><th>Registered user</th><th>User IP Address</th><th>Registered (server time)</th></tr>";
                         data += "</THEAD>";
-                    data += "<TBODY>";
+                        data += "<TBODY>";
                         var users = JSON.parse(this.response);
                         for (row in users) {
                             data += "<tr class='active-row'>";
-                        if (users[row].ip!=null) data += "<td>" + users[row].email + "</td><td><a href='javascript:openIpData(\"" + users[row].ip + "\");'>" + users[row].ip + "</a></td><td>" + users[row].date + "</td>";
-                        else data += "<td>" + users[row].email + "</td><td>IP data error</td><td>" + users[row].date + "</td>";
-                        data += "</tr>";
+                            if (users[row].ip != null) data += "<td>" + users[row].email + "</td><td><a href='javascript:openIpData(\"" + users[row].ip + "\");'>" + users[row].ip + "</a></td><td>" + users[row].date + "</td>";
+                            else data += "<td>" + users[row].email + "</td><td>IP data error</td><td>" + users[row].date + "</td>";
+                            data += "</tr>";
                         }
-                    data += "</TBODY>";
-                data += "</TABLE>";
-            document.getElementById("results").innerHTML = data;
+                        data += "</TBODY>";
+                        data += "</TABLE>";
+                        document.getElementById("results").innerHTML = data;
                     }
                     else {
-                document.getElementById("results").innerHTML = "<p>Just a sec, fetching data...</p>";
-            }
+                        //show message until the results are ready
+                        document.getElementById("results").innerHTML = "<p>Just a sec, fetching data...</p>";
+                    }
                 }
-            xhttp.open("GET", urlMain);
-            xhttp.setRequestHeader("content-type", "application/json");
-            xhttp.setRequestHeader('Authorization', "Basic " + btoa(window.sessionStorage.getItem("apiUsername") + ":" + window.sessionStorage.getItem("apiPassword")));
-            xhttp.send();
+                xhttp.open("GET", urlMain);
+                xhttp.setRequestHeader("content-type", "application/json");
+                xhttp.setRequestHeader('Authorization', "Basic " + btoa(window.sessionStorage.getItem("apiUsername") + ":" + window.sessionStorage.getItem("apiPassword")));
+                xhttp.send();
             }
 
         </script>
