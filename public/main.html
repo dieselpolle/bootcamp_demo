@@ -51,7 +51,8 @@
                         var users = JSON.parse(this.response);
                         for (row in users) {
                             data += "<tr class='active-row'>";
-                        data += "<td>" + users[row].email + "</td><td><a href='javascript:openIpData(\"" + users[row].ip + "\");'>" + users[row].ip + "</a></td><td>" + users[row].date + "</td>";
+                        if (users[row].ip!=null) data += "<td>" + users[row].email + "</td><td><a href='javascript:openIpData(\"" + users[row].ip + "\");'>" + users[row].ip + "</a></td><td>" + users[row].date + "</td>";
+                        else data += "<td>" + users[row].email + "</td><td>IP data error</td><td>" + users[row].date + "</td>";
                         data += "</tr>";
                         }
                     data += "</TBODY>";
