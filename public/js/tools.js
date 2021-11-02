@@ -136,7 +136,7 @@ function checkLogin() {
 }
 //gets the IP information of the client
 function getIP() {
-    let url = 'http://ip-api.com/json';
+    let url = 'https://ip-api.com/json';
     var xhttp = new XMLHttpRequest();
     xhttp.open("GET", url);
     xhttp.setRequestHeader("content-type", "application/json");
