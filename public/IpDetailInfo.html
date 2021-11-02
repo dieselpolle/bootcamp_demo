@@ -33,19 +33,22 @@
             if (xhttp.readyState == 4) {
                 var data=xhttp.responseText;
                 jsonIpDataResponse = JSON.parse(data);
-                document.write("<p>IP: "+jsonIpDataResponse[0].query+"</p>");
-                document.write("<p>Country: "+jsonIpDataResponse[0].country+"</p>");
-                document.write("<p>Country code: "+jsonIpDataResponse[0].countrycode+"</p>");
-                document.write("<p>Region: "+jsonIpDataResponse[0].region+"</p>");
-                document.write("<p>Region name: "+jsonIpDataResponse[0].regionname+"</p>");
-                document.write("<p>City: "+jsonIpDataResponse[0].city+"</p>");
-                document.write("<p>Zip code: "+jsonIpDataResponse[0].zip+"</p>");
-                document.write("<p>LAT: "+jsonIpDataResponse[0].lat+"</p>");
-                document.write("<p>LON: "+jsonIpDataResponse[0].lon+"</p>");
-                document.write("<p>Timezone: "+jsonIpDataResponse[0].timezone+"</p>");
-                document.write("<p>ISP: "+jsonIpDataResponse[0].isp+"</p>");
-                document.write("<p>Organization: "+jsonIpDataResponse[0].org+"</p>");
-                document.write("<p>Organization: "+jsonIpDataResponse[0].org2+"</p>");
+                document.write("<head><link rel='stylesheet' href='css/styles.css'></head>");
+                document.write("<body><div class='container'>");
+                document.write("<p class='p_ip'>IP: "+jsonIpDataResponse[0].query+"</p>");
+                document.write("<p class='p_ip'>Country: "+jsonIpDataResponse[0].country+"</p>");
+                document.write("<p class='p_ip'>Country code: "+jsonIpDataResponse[0].countrycode+"</p>");
+                document.write("<p class='p_ip'>Region: "+jsonIpDataResponse[0].region+"</p>");
+                document.write("<p class='p_ip'>Region name: "+jsonIpDataResponse[0].regionname+"</p>");
+                document.write("<p class='p_ip'>City: "+jsonIpDataResponse[0].city+"</p>");
+                document.write("<p class='p_ip'>Zip code: "+jsonIpDataResponse[0].zip+"</p>");
+                document.write("<p class='p_ip'>LAT: "+jsonIpDataResponse[0].lat+"</p>");
+                document.write("<p class='p_ip'>LON: "+jsonIpDataResponse[0].lon+"</p>");
+                document.write("<p class='p_ip'>Timezone: "+jsonIpDataResponse[0].timezone+"</p>");
+                document.write("<p class='p_ip'>ISP: "+jsonIpDataResponse[0].isp+"</p>");
+                document.write("<p class='p_ip'>Organization: "+jsonIpDataResponse[0].org+"</p>");
+                document.write("<p class='p_ip'>Organization: "+jsonIpDataResponse[0].org2+"</p>");
+                document.write("</div></body>");
 
             }
         };
