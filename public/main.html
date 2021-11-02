@@ -20,7 +20,7 @@
             if (checkLogin() == false) window.location = "index.html";
             function openIpData(ipAddress) {
                 width = 300;
-                height = 500;
+                height = 450;
                 const pos = {
                     x: (screen.width / 2) - (width / 2),
                     y: (screen.height / 2) - (height / 2)
@@ -31,11 +31,11 @@
         </script>
         <h1>Calling REST API</h1>
         <p>You are logged in as:
-            <script>document.writeln(window.sessionStorage.getItem("email"))</script><a
-                href="javascript:window.sessionStorage.setItem('password', '');javascript:window.location='index.html';">LOGOUT</a>
+            <script>document.writeln(window.sessionStorage.getItem("email"))</script>
+            <a href="javascript:window.sessionStorage.setItem('password', '');javascript:window.location='index.html';">(LOGOUT)</a>
         </p>
         <hr>
-        <center><button type="submit" class="registerbtn" style="width: 250px;" onClick="javascript:window.location.reload()">Reload</button></center>
+        <center><button type="submit" class="buttonStyle" style="width: 250px;" onClick="javascript:window.location.reload()">Reload</button></center>
         <div id="results"></div>
         <script>
                 getUsers();
