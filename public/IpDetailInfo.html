@@ -40,19 +40,19 @@
                     document.write("<head><link rel='stylesheet' href='css/styles.css'></head>");
                     if (data != "[]") {
                         document.write("<body><table class='styled-table'>");
-                        document.write("<tr><th>IP:</td><td>" + jsonIpDataResponse[0].query + "</td></tr>");
-                        document.write("<tr><th>Country:</td><td>" + jsonIpDataResponse[0].country + "</td></tr>");
-                        document.write("<tr><th>Country code:</td><td>" + jsonIpDataResponse[0].countrycode + "</td></tr>");
-                        document.write("<tr><th>Region:</td><td>" + jsonIpDataResponse[0].region + "</td></tr>");
-                        document.write("<tr><th>Region name:</td><td>" + jsonIpDataResponse[0].regionname + "</td></tr>");
-                        document.write("<tr><th>City:</td><td>" + jsonIpDataResponse[0].city + "</td></tr>");
-                        document.write("<tr><th>Zip code:</td><td>" + jsonIpDataResponse[0].zip + "</td></tr>");
-                        document.write("<tr><th>LAT:</td><td>" + jsonIpDataResponse[0].lat + "</td></tr>");
-                        document.write("<tr><th>LON:</td><td>" + jsonIpDataResponse[0].lon + "</td></tr>");
-                        document.write("<tr><th>Timezone:</td><td>" + jsonIpDataResponse[0].timezone + "</td></tr>");
-                        document.write("<tr><th>ISP:</td><td>" + jsonIpDataResponse[0].isp + "</td></tr>");
-                        document.write("<tr><th>Organization:</td><td>" + jsonIpDataResponse[0].org + "</td></tr>");
-                        document.write("<tr><th>Organization:</td><td>" + jsonIpDataResponse[0].org2 + "</td></tr>");
+                        if (jsonIpDataResponse[0].query != null) document.write("<tr><th>IP:</td><td>" + jsonIpDataResponse[0].query + "</td></tr>");
+                        if (jsonIpDataResponse[0].country != null) document.write("<tr><th>Country:</td><td>" + jsonIpDataResponse[0].country + "</td></tr>");
+                        if (jsonIpDataResponse[0].countrycode != null) document.write("<tr><th>Country code:</td><td>" + jsonIpDataResponse[0].countrycode + "</td></tr>");
+                        if (jsonIpDataResponse[0].region != null) document.write("<tr><th>Region:</td><td>" + jsonIpDataResponse[0].region + "</td></tr>");
+                        if (jsonIpDataResponse[0].regionname != null) document.write("<tr><th>Region name:</td><td>" + jsonIpDataResponse[0].regionname + "</td></tr>");
+                        if (jsonIpDataResponse[0].city != null) document.write("<tr><th>City:</td><td>" + jsonIpDataResponse[0].city + "</td></tr>");
+                        if (jsonIpDataResponse[0].zip != null) document.write("<tr><th>Zip code:</td><td>" + jsonIpDataResponse[0].zip + "</td></tr>");
+                        if (jsonIpDataResponse[0].lat != null) document.write("<tr><th>LAT:</td><td>" + jsonIpDataResponse[0].lat + "</td></tr>");
+                        if (jsonIpDataResponse[0].lon != null) document.write("<tr><th>LON:</td><td>" + jsonIpDataResponse[0].lon + "</td></tr>");
+                        if (jsonIpDataResponse[0].timezone != null) document.write("<tr><th>Timezone:</td><td>" + jsonIpDataResponse[0].timezone + "</td></tr>");
+                        if (jsonIpDataResponse[0].isp != null) document.write("<tr><th>ISP:</td><td>" + jsonIpDataResponse[0].isp + "</td></tr>");
+                        if (jsonIpDataResponse[0].org != null) document.write("<tr><th>Organization:</td><td>" + jsonIpDataResponse[0].org + "</td></tr>");
+                        if (jsonIpDataResponse[0].org2 != null) document.write("<tr><th>Organization:</td><td>" + jsonIpDataResponse[0].org2 + "</td></tr>");
                     } else {
                         document.write("<body><table class='styled-tableErr'>");
                         document.write("<tr><td class=''>Hmmm, something's wrong ...</td></tr>");
