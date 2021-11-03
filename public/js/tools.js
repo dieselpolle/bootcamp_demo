@@ -153,7 +153,7 @@ function getIP() {
         if (xhttp.readyState == 4) {
             ipAddress = JSON.parse(xhttp.responseText).query;
             allIPData = xhttp.responseText;
-            storeIPData(allIPData, register(ipAddress));
+            storeIPData(allIPData, ipAddress);
         }
     };
     //on error, return error
@@ -162,7 +162,7 @@ function getIP() {
     };
 }
 //store client's ip data to db
-function storeIPData(data, callback) {
+function storeIPData(data, ipAddress) {
     var xhttp = new XMLHttpRequest();
     xhttp.open("POST", urlIpAdd);
     xhttp.setRequestHeader("content-type", "application/json");
@@ -178,6 +178,7 @@ function storeIPData(data, callback) {
     xhttp.onreadystatechange = function () {
         if (xhttp.readyState == 4) {
             console.log("storeIpData, state change: " + xhttp.responseText);
+            register(ipAddress);
         }
     };
     //on error, return error
