@@ -38,8 +38,7 @@
                 href="javascript:window.sessionStorage.setItem('password', '');javascript:window.location='index.html';">(LOGOUT)</a>
         </p>
         <hr>
-        <center><button type="submit" class="buttonStyle" style="width: 250px;"
-                onClick="javascript:window.location.reload()">Reload</button></center>
+        <button type="submit" class="buttonStyle" style="width: 250px;" onClick="javascript:window.location.reload()">Reload</button>
         <div id="results"></div>
         <script>
             //gets user listing, separate function call because if some pre handling is needed in future
@@ -48,7 +47,7 @@
                 var xhttp = new XMLHttpRequest();
                 xhttp.onreadystatechange = function () {
                     if (this.readyState == 4 && this.status == 200) {
-                        var data = "<TABLE class='styled-table'>";
+                        var data = "<TABLE width='60%' class='styled-table'>";
                         data += "<THEAD>";
                         data += "<tr><th>Registered user</th><th>User IP Address</th><th>Registered (server time)</th></tr>";
                         data += "</THEAD>";

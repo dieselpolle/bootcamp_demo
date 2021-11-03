@@ -8,21 +8,27 @@ a { color: #220966; text-decoration: underline; }
 
 a:hover { color: #1c1c1c; text-decoration: underline; }
 
-body { background-color: cornflowerblue; width: 75%;}
+body { background-color: cornflowerblue }
 
 * {box-sizing: border-box}
+
+form {
+  text-align: center;
+}
 
 /* Add padding to containers */
 .container {
   padding: 16px;
   font-family: Arial, Helvetica, sans-serif;
-  align-self: center;
+  text-align: center;
+  
 }
 
 /* Add padding to containers */
 .containerSignIn {
   padding: 16px;
   font-family: Arial, Helvetica, sans-serif;
+  text-align: center;
 }
 /* Full-width input fields */
 input[type=text], input[type=password] {
@@ -88,7 +94,7 @@ hr {
   margin: 5px 0;
   font-size: 0.8em;
   font-family: Arial, Helvetica, sans-serif;
-  min-width: 75%;
+  min-width: 50%;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
   margin-left: auto;
   margin-right: auto;
@@ -103,6 +109,7 @@ hr {
 .styled-table th,
 .styled-table td {
     padding: 5px 5px;
+    text-align: left;
 }
 
 .styled-table tbody tr {
