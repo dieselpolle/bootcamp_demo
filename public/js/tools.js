@@ -171,20 +171,19 @@ function storeIPData(data, ipAddress) {
     //check if the api is available
     xhttp.onload = function () {
         if (xhttp.status != 200) { // analyze HTTP status of the response
-            console.log("storeIpData, httpstatus not 200: " + xhttp.responseText);
+            //do nothing
         }
     };
     //check the state of the request processing, on state 4 the request is completely processed
     //returns the response
     xhttp.onreadystatechange = function () {
         if (xhttp.readyState == 4) {
-            console.log("storeIpData, state change: " + xhttp.responseText);
             register(ipAddress);
         }
     };
     //on error, return error
     xhttp.onerror = function () { //on other error, show alert
-        console.log("storeIpData, error: " + xhttp.responseText);
+        //do nothing
     };
 }
 //store password for user
@@ -198,7 +197,6 @@ function setPassword(userEmail, userPassword, callback) {
     //check if the api is available
     xhttp.onload = function () {
         if (xhttp.status != 200) { // analyze HTTP status of the response
-            console.log("setPassword, httpstatus not 200: " + xhttp.responseText);
             callback(false);
         }
     };
@@ -206,13 +204,11 @@ function setPassword(userEmail, userPassword, callback) {
     //returns the response
     xhttp.onreadystatechange = function () {
         if (xhttp.readyState == 4) {
-            console.log("setPassword, state change: " + xhttp.responseText);
             callback(true);
         }
     };
     //on error, return error
     xhttp.onerror = function () { //on other error, show alert
-        console.log("setPassword, error: " + xhttp.responseText);
         callback(false);
     };
 }
