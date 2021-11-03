@@ -2,7 +2,7 @@
 
 This app stores users with IP address information to a database by using REST API. 
 
-Node packages needed for running the app: express, cors, helmet.
+The app is implemented by Java Script and these additional packages needed for running the app: express, cors, helmet.
 
 ## Install
 Clone the repository and install packages:
