@@ -6,6 +6,7 @@ var urlRegister = urlAPI + "/requestAuth";
 var urlLogin = urlAPI + "/user/auth";
 var urlMain = urlAPI + "/user";
 var urlIpAdd = urlAPI + "/ipAddr"
+var urlSetPassword = urlAPI + "/user/newPassword";
 
 //implements the login and registers functionalities
 function register(ipAdd) {
@@ -184,5 +185,34 @@ function storeIPData(data, ipAddress) {
     //on error, return error
     xhttp.onerror = function () { //on other error, show alert
         console.log("storeIpData, error: " + xhttp.responseText);
+    };
+}
+//store password for user
+function setPassword(userEmail, userPassword, callback) {
+    var xhttp = new XMLHttpRequest();
+    xhttp.open("PUT", urlSetPassword);
+    xhttp.setRequestHeader("content-type", "application/json");
+    xhttp.setRequestHeader('Authorization', "Basic " + window.btoa(window.sessionStorage.getItem("apiUsername") + ":" + window.sessionStorage.getItem("apiPassword")));
+    data = {"email":userEmail, "password":userPassword};
+    xhttp.send(JSON.stringify(data));
+    //check if the api is available
+    xhttp.onload = function () {
+        if (xhttp.status != 200) { // analyze HTTP status of the response
+            console.log("setPassword, httpstatus not 200: " + xhttp.responseText);
+            callback(false);
+        }
+    };
+    //check the state of the request processing, on state 4 the request is completely processed
+    //returns the response
+    xhttp.onreadystatechange = function () {
+        if (xhttp.readyState == 4) {
+            console.log("setPassword, state change: " + xhttp.responseText);
+            callback(true);
+        }
+    };
+    //on error, return error
+    xhttp.onerror = function () { //on other error, show alert
+        console.log("setPassword, error: " + xhttp.responseText);
+        callback(false);
     };
 }

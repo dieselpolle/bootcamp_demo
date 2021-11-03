@@ -30,6 +30,16 @@
                 const features = `this.href, menubar=no, resizable=no, scrollbars=no, toolbar=no, titlebar=no, width=${width}, height=${height}, left=${pos.x}, top=${pos.y}`;
                 window.open("IpDetailInfo.html?ipAddressIs=" + ipAddress, "IP DATA", features);
             }
+            function openSetPassword(userEmail) {
+                width = 450;
+                height = 300;
+                const pos = {
+                    x: (screen.width / 2) - (width / 2),
+                    y: (screen.height / 2) - (height / 2)
+                };
+                const features = `this.href, menubar=no, resizable=no, scrollbars=no, toolbar=no, titlebar=no, width=${width}, height=${height}, left=${pos.x}, top=${pos.y}`;
+                window.open("setPassword.html?emailIs=" + userEmail, "Set password", features);
+            }
         </script>
         <h1>Calling REST API</h1>
         <p>You are logged in as:
@@ -55,8 +65,8 @@
                         var users = JSON.parse(this.response);
                         for (row in users) {
                             data += "<tr class='active-row'>";
-                            if (users[row].ip != null) data += "<td>" + users[row].email + "</td><td><a href='javascript:openIpData(\"" + users[row].ip + "\");'>" + users[row].ip + "</a></td><td>" + users[row].date + "</td>";
-                            else data += "<td>" + users[row].email + "</td><td>IP data error</td><td>" + users[row].date + "</td>";
+                            if (users[row].ip != null) data += "<td>" + users[row].email + " <a href='javascript:openSetPassword(\""+ users[row].email +"\");'>set pw</a></td><td><a href='javascript:openIpData(\"" + users[row].ip + "\");'>" + users[row].ip + "</a></td><td>" + users[row].date + "</td>";
+                            else data += "<td>" + users[row].email + " (<a href='javascript:openSetPassword("+ users[row].email +")'>set pw</a>)</td><td>IP data error</td><td>" + users[row].date + "</td>";
                             data += "</tr>";
                         }
                         data += "</TBODY>";
